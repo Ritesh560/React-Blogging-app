@@ -20,7 +20,7 @@ import FlashMessages from "./components/flashMessages"
 import Profile from "./components/Profile"
 
 import Axios from "axios"
-Axios.defaults.baseURL = "http://localhost:8080"
+Axios.defaults.baseURL = "https://react--blogging-app.herokuapp.com/"
 
 function App() {
   const initialState = {
