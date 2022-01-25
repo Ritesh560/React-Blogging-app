@@ -1,5 +1,5 @@
 # React-Blogging-app
-[under progress](https://61ee93d40d68e6b1ac4fa771--zen-lalande-6739fb.netlify.app/)
+Link to project:- [Blogging-App](https://61ee93d40d68e6b1ac4fa771--zen-lalande-6739fb.netlify.app/)
 
 ## Getting Started with Create React App
 
