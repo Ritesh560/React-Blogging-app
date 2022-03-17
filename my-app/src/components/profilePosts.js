@@ -39,7 +39,7 @@ function ProfilePosts() {
 
         return (
           <Link key={post._id} to={`/post/${post._id}`} className="list-group-item list-group-item-action">
-            <img className="avatar-tiny" src={post.author.avatar} /> <strong>{post.title}</strong> <span className="text-muted small">on {dateFormatted} </span>
+            <img className="avatar-tiny" src={post.author.avatar} alt=":)" /> <strong>{post.title}</strong> <span className="text-muted small">on {dateFormatted} </span>
           </Link>
         )
       })}

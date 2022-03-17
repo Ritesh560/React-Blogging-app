@@ -1,4 +1,3 @@
-import logo from "./logo.svg"
 import "./App.css"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import React, { useState, useContext, useReducer, useEffect } from "react"
@@ -18,6 +17,7 @@ import CreatePost from "./components/createPost"
 import ViewSinglePost from "./components/viewSinglePost"
 import FlashMessages from "./components/flashMessages"
 import Profile from "./components/Profile"
+import EditPost from "./components/EditPost"
 
 import Axios from "axios"
 Axios.defaults.baseURL = "https://react--blogging-app.herokuapp.com/"
@@ -81,8 +81,11 @@ function App() {
             <Route path="/create-post">
               <CreatePost />
             </Route>
-            <Route path="/post/:id">
+            <Route path="/post/:id" exact>
               <ViewSinglePost />
+            </Route>
+            <Route path="/post/:id/edit" exact>
+              <EditPost />
             </Route>
             <Route path="/terms">
               <Terms />
