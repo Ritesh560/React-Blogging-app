@@ -18,6 +18,7 @@ import ViewSinglePost from "./components/viewSinglePost"
 import FlashMessages from "./components/flashMessages"
 import Profile from "./components/Profile"
 import EditPost from "./components/EditPost"
+import PageNotFound from "./components/pageNotFound"
 
 import Axios from "axios"
 Axios.defaults.baseURL = "https://react--blogging-app.herokuapp.com/"
@@ -34,6 +35,7 @@ function App() {
   }
 
   function ourReducer(draft, action) {
+    // eslint-disable-next-line default-case
     switch (action.type) {
       case "login":
         draft.loggedIn = true
@@ -89,6 +91,9 @@ function App() {
             </Route>
             <Route path="/terms">
               <Terms />
+            </Route>
+            <Route>
+              <PageNotFound />
             </Route>
           </Switch>
 
