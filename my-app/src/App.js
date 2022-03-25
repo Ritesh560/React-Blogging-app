@@ -2,6 +2,7 @@ import "./App.css"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import React, { useState, useContext, useReducer, useEffect } from "react"
 import { useImmerReducer } from "use-immer"
+import { CSSTransition } from "react-transition-group"
 
 import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
@@ -19,6 +20,7 @@ import FlashMessages from "./components/flashMessages"
 import Profile from "./components/Profile"
 import EditPost from "./components/EditPost"
 import PageNotFound from "./components/pageNotFound"
+import Search from "./components/search"
 
 import Axios from "axios"
 Axios.defaults.baseURL = "https://react--blogging-app.herokuapp.com/"
@@ -32,6 +34,7 @@ function App() {
       username: localStorage.getItem("complexAppUsername"),
       avatar: localStorage.getItem("complexAppAvatar"),
     },
+    isSearching: false,
   }
 
   function ourReducer(draft, action) {
@@ -46,6 +49,12 @@ function App() {
         return
       case "flashMessage":
         draft.flashMessages.push(action.value)
+        return
+      case "openSearch":
+        draft.isSearching = true
+        return
+      case "closeSearch":
+        draft.isSearching = false
         return
     }
   }
@@ -96,7 +105,9 @@ function App() {
               <PageNotFound />
             </Route>
           </Switch>
-
+          <CSSTransition timeout={330} in={state.isSearching} classNames="search-overlay" unmountOnExit>
+            <Search />
+          </CSSTransition>
           <Footer />
         </BrowserRouter>
       </DispatchContext.Provider>
