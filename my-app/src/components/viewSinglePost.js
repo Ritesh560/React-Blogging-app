@@ -33,8 +33,6 @@ function ViewSinglePost(props) {
     fetchPost()
   }, [])
 
-  console.log(post)
-
   if (!isLoading && !post) {
     return <PageNotFound />
   }
