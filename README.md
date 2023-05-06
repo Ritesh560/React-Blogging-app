@@ -1,6 +1,3 @@
-# React-Blogging-app
-Link to project:- [Blogging-App](https://61ee93d40d68e6b1ac4fa771--zen-lalande-6739fb.netlify.app/)
-
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
