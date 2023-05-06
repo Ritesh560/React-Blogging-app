@@ -23,7 +23,7 @@ import PageNotFound from "./components/pageNotFound"
 import Search from "./components/search"
 
 import Axios from "axios"
-Axios.defaults.baseURL = "https://react--blogging-app.herokuapp.com/"
+Axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL
 
 function App() {
   const initialState = {
