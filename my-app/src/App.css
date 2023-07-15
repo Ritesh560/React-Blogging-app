@@ -622,3 +622,15 @@ textarea.tall-textarea {
     opacity: 1;
   }
 }
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+  box-shadow: 1px 8px 24px #7d8ee766;
+  background-color: #6469ff;
+  color: #fff;
+  cursor: pointer;
+}
