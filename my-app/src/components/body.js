@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react"
 import Page from "./page"
 import Axios from "axios"
 import DispatchContext from "../DispatchContext"
-import Spinner from "../libs/Spinner/Spinner"
+import Spinner from "../libs/components/Spinner/Spinner"
 
 function Body() {
   const [username, setUsername] = useState()
