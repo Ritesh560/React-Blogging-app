@@ -1,30 +1,43 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import Page from "./page"
 import Axios from "axios"
+import DispatchContext from "../DispatchContext"
 
 function Body() {
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [isLogin, setIsLogin] = useState(false)
+  const appDispatch = useContext(DispatchContext)
 
   async function HandleSubmit(e) {
     e.preventDefault()
-    try {
-      await Axios.post("/register", { username, email, password })
-      console.log("success")
-    } catch (e) {
-      console.log("errorrrr")
+    if (!isLogin) {
+      try {
+        const response = await Axios.post("/register", { username, email, password })
+        setIsLogin(true)
+        appDispatch({ type: "login", data: response.data })
+      } catch (e) {
+        console.log("errorrrr")
+      }
+    } else {
+      try {
+        const response = await Axios.post("/login", { username, password })
+        if (response.data) {
+          appDispatch({ type: "login", data: response.data })
+        } else {
+          console.log("incorrect Username/Password")
+        }
+      } catch (e) {
+        console.log("error in logging in")
+      }
     }
   }
 
   return (
     <>
-      <Page wide="true" title="Welcome !!!">
-        <div className="row align-items-center">
-          <div className="col-lg-7 py-3 py-md-5">
-            <h1 className="display-3">Remember Writing?</h1>
-            <p className="lead text-muted">Are you sick of short tweets and impersonal &ldquo;shared&rdquo; posts that are reminiscent of the late 90&rsquo;s email forwards? We believe getting back to actually writing is the key to enjoying the internet again.</p>
-          </div>
+      <Page wide="true" title="Welcome">
+        <div className="row align-items-center justify-content-center">
           <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
             <form onSubmit={HandleSubmit}>
               <div className="form-group">
@@ -33,21 +46,26 @@ function Body() {
                 </label>
                 <input onChange={(e) => setUsername(e.target.value)} id="username-register" name="username" className="form-control" type="text" placeholder="Pick a username" autoComplete="off" />
               </div>
-              <div className="form-group">
-                <label htmlFor="email-register" className="text-muted mb-1">
-                  <small>Email</small>
-                </label>
-                <input onChange={(e) => setEmail(e.target.value)} id="email-register" name="email" className="form-control" type="text" placeholder="you@example.com" autoComplete="off" />
-              </div>
+              {!isLogin && (
+                <div className="form-group">
+                  <label htmlFor="email-register" className="text-muted mb-1">
+                    <small>Email</small>
+                  </label>
+                  <input onChange={(e) => setEmail(e.target.value)} id="email-register" name="email" className="form-control" type="text" placeholder="you@example.com" autoComplete="off" />
+                </div>
+              )}
               <div className="form-group">
                 <label htmlFor="password-register" className="text-muted mb-1">
                   <small>Password</small>
                 </label>
                 <input onChange={(e) => setPassword(e.target.value)} id="password-register" name="password" className="form-control" type="password" placeholder="Create a password" />
               </div>
-              <button type="submit" className="py-3 mt-4 btn btn-lg btn-success btn-block">
-                Sign up for ComplexApp
+              <button type="submit" className="py-2.5 mt-4 btn btn-lg btn-block action-button">
+                Sign up
               </button>
+              <div onClick={() => setIsLogin((prev) => !prev)} className="text-right text-primary mt-2 pointer">
+                {isLogin ? "New user? Register here" : "Already have an account? Login here"}
+              </div>
             </form>
           </div>
         </div>

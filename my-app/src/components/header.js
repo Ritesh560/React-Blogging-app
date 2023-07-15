@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react"
 import { Link } from "react-router-dom"
-import HeaderLoggedOut from "./headerLoggedOut"
 import HeaderLoggedIn from "./headerLoggedIn"
 import StateContext from "../StateContext"
 
@@ -13,10 +12,10 @@ function Header(props) {
           <h4 className="my-0 mr-md-auto font-weight-normal">
             <Link to="/" className="text-white">
               {" "}
-              ComplexApp{" "}
+              BlogHub{" "}
             </Link>
           </h4>
-          {appState.loggedIn ? <HeaderLoggedIn /> : <HeaderLoggedOut />}
+          {appState.loggedIn && <HeaderLoggedIn />}
         </div>
       </header>
     </>

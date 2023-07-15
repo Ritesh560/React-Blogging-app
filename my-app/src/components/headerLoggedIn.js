@@ -35,7 +35,7 @@ function HeaderLoggedIn(props) {
       <Link className="btn btn-sm btn-success mr-2" to="/create-post">
         Create Post
       </Link>{" "}
-      <button onClick={HandelLoggedOut} className="btn btn-sm btn-secondary">
+      <button onClick={HandelLoggedOut} className="btn btn-sm btn-secondary ">
         Sign Out
       </button>
     </div>

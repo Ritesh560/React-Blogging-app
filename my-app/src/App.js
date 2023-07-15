@@ -1,4 +1,5 @@
 import "./App.css"
+import "./common/common.css"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import React, { useState, useContext, useReducer, useEffect } from "react"
 import { useImmerReducer } from "use-immer"
@@ -28,12 +29,12 @@ Axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL
 
 function App() {
   const initialState = {
-    loggedIn: Boolean(localStorage.getItem("complexAppToken")),
+    loggedIn: Boolean(localStorage.getItem("BlogHubToken")),
     flashMessages: [],
     user: {
-      token: localStorage.getItem("complexAppToken"),
-      username: localStorage.getItem("complexAppUsername"),
-      avatar: localStorage.getItem("complexAppAvatar"),
+      token: localStorage.getItem("BlogHubToken"),
+      username: localStorage.getItem("BlogHubUsername"),
+      avatar: localStorage.getItem("BlogHubAvatar"),
     },
     isSearching: false,
   }
@@ -64,13 +65,13 @@ function App() {
 
   useEffect(() => {
     if (state.loggedIn) {
-      localStorage.setItem("complexAppToken", state.user.token)
-      localStorage.setItem("complexAppUsername", state.user.username)
-      localStorage.setItem("complexAppAvatar", state.user.avatar)
+      localStorage.setItem("BlogHubToken", state.user.token)
+      localStorage.setItem("BlogHubUsername", state.user.username)
+      localStorage.setItem("BlogHubAvatar", state.user.avatar)
     } else {
-      localStorage.removeItem("complexAppToken")
-      localStorage.removeItem("complexAppUsername")
-      localStorage.removeItem("complexAppAvatar")
+      localStorage.removeItem("BlogHubToken")
+      localStorage.removeItem("BlogHubUsername")
+      localStorage.removeItem("BlogHubAvatar")
     }
   }, [state.loggedIn])
 

@@ -3,7 +3,7 @@ import Container from "./container"
 
 function Page(props) {
   useEffect(() => {
-    document.title = `${props.title} | complex-app`
+    document.title = `BlogHub`
     window.scrollTo(0, 0)
   }, [props.title])
 
