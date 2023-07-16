@@ -29,10 +29,10 @@ function Profile() {
       try {
         const response = await Axios.post(`/profile/${username}`, { token: appState.user.token }, { cancelToken: ourRequest.token })
         setState((draft) => {
-          draft.profileData = response.data
+          draft.profileData = response?.data
         })
       } catch (error) {
-        console.log(error.response.data)
+        console.log(error?.response?.data)
       }
     }
     fetchData()

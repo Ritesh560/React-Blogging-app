@@ -6,3 +6,11 @@
   box-shadow: 2px 2px 40px #0023230d;
   border-radius: 20px;
 }
+
+.create-post-box {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
