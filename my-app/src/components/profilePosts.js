@@ -1,47 +1,38 @@
-import React, { useEffect, useState } from "react"
-import { useParams, Link } from "react-router-dom"
+import React, { useState, useEffect } from "react"
 import Axios from "axios"
+import { useParams, Link } from "react-router-dom"
 import LoadingDotsIcon from "./LoadingDotsIcon"
+import Post from "./Post"
 
 function ProfilePosts() {
   const { username } = useParams()
-  const [isLoading, setisLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     const ourRequest = Axios.CancelToken.source()
+
     async function fetchPosts() {
       try {
         const response = await Axios.get(`/profile/${username}/posts`, { cancelToken: ourRequest.token })
-        setisLoading(false)
         setPosts(response.data)
-      } catch (e) {
-        console.log("There is an  error or a cancel request.")
+        setIsLoading(false)
+      } catch (error) {
+        console.log(error.response.data)
       }
     }
     fetchPosts()
     return () => {
       ourRequest.cancel()
     }
-  }, [])
+  }, [username])
 
-  if (isLoading)
-    return (
-      <div>
-        <LoadingDotsIcon />
-      </div>
-    )
+  if (isLoading) return <LoadingDotsIcon />
+
   return (
     <div className="list-group">
       {posts.map((post) => {
-        const date = new Date(post.createdDate)
-        const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-
-        return (
-          <Link key={post._id} to={`/post/${post._id}`} className="list-group-item list-group-item-action">
-            <img className="avatar-tiny" src={post.author.avatar} alt=":)" /> <strong>{post.title}</strong> <span className="text-muted small">on {dateFormatted} </span>
-          </Link>
-        )
+        return <Post noAuthor={true} post={post} key={post._id} />
       })}
     </div>
   )

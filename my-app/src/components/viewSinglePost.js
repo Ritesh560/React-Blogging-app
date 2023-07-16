@@ -1,90 +1,90 @@
-import React, { useContext, useEffect, useState } from "react"
-import Page from "./page"
+import React, { useState, useEffect, useContext } from "react"
+import Page from "./Page"
 import { useParams, Link, withRouter } from "react-router-dom"
 import Axios from "axios"
+import LoadingDotsIcon from "./LoadingDotsIcon"
 import ReactMarkdown from "react-markdown"
 import ReactTooltip from "react-tooltip"
-
+import NotFound from "./NotFound"
 import StateContext from "../StateContext"
 import DispatchContext from "../DispatchContext"
-
-import LoadingDotsIcon from "./LoadingDotsIcon"
-import PageNotFound from "./pageNotFound"
-import axios from "axios"
 
 function ViewSinglePost(props) {
   const appState = useContext(StateContext)
   const appDispatch = useContext(DispatchContext)
-
   const { id } = useParams()
-  const [isLoading, setisLoading] = useState(true)
-  const [post, setPost] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+  const [post, setPost] = useState()
 
   useEffect(() => {
+    const ourRequest = Axios.CancelToken.source()
+
     async function fetchPost() {
       try {
-        const response = await Axios.get(`/post/${id}`)
+        const response = await Axios.get(`/post/${id}`, { cancelToken: ourRequest.token })
         setPost(response.data)
-        setisLoading(false)
-      } catch (e) {
-        console.log("There was an error")
+        setIsLoading(false)
+      } catch (error) {
+        console.log(error.response.data)
       }
     }
     fetchPost()
+    return () => {
+      ourRequest.cancel()
+    }
   }, [id])
 
   if (!isLoading && !post) {
-    return <PageNotFound />
+    return <NotFound />
   }
 
-  if (isLoading) {
+  if (isLoading)
     return (
-      <page title="...">
+      <Page title="...">
         <LoadingDotsIcon />
-      </page>
+      </Page>
     )
-  }
 
-  async function handelDelete(e) {
-    e.preventDefault()
-    const areYouSure = window.confirm("Do you really want to delete this post?")
-    if (areYouSure) {
-      try {
-        const response = await axios.delete(`/post/${id}`, { data: { token: appState.user.token } })
-        if (response.data === "Success") {
-          appDispatch({ type: "flashMessage", value: "Post was successfully deleted." })
-          props.history.push(`/profile/${appState.user.username}`)
-        }
-      } catch (e) {
-        console.log("Error in Deletion.")
-      }
-    }
-  }
+  const date = new Date(post.createdDate)
+  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
 
   function isOwner() {
     if (appState.loggedIn) {
-      return appState.user.username === post.author.username
+      return appState.user.username == post.author.username
     }
-
     return false
   }
 
-  const date = new Date(post.createdDate)
-  const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+  async function deleteHandler() {
+    const areYouSure = window.confirm("Do you really want to delete this post?")
+    if (areYouSure) {
+      try {
+        const response = await Axios.delete(`/post/${id}`, { data: { token: appState.user.token } })
+        if (response.data == "Success") {
+          // 1. display flash message
+          appDispatch({ type: "flashMessage", value: "Post was successfully deleted." })
+          // 2. redirect back to the current user's profile
+          props.history.push(`/profile/${appState.user.username}`)
+        }
+      } catch (error) {
+        console.log(error.response.data)
+      }
+    }
+  }
 
   return (
     <Page title={post.title}>
       <div className="d-flex justify-content-between">
-        <h2>{post.title} </h2>
+        <h2>{post.title}</h2>
         {isOwner() && (
           <span className="pt-2">
             <Link to={`/post/${post._id}/edit`} data-tip="Edit" data-for="edit" className="text-primary mr-2">
               <i className="fas fa-edit"></i>
             </Link>
             <ReactTooltip id="edit" className="custom-tooltip" />{" "}
-            <Link onClick={handelDelete} data-tip="Delete" data-for="delete" className="delete-post-button text-danger">
+            <a onClick={deleteHandler} data-tip="Delete" data-for="delete" className="delete-post-button text-danger">
               <i className="fas fa-trash"></i>
-            </Link>
+            </a>
             <ReactTooltip id="delete" className="custom-tooltip" />
           </span>
         )}
@@ -92,13 +92,13 @@ function ViewSinglePost(props) {
 
       <p className="text-muted small mb-4">
         <Link to={`/profile/${post.author.username}`}>
-          <img className="avatar-tiny" src={post.author.avatar} alt=":)" />
+          <img className="avatar-tiny" src={post.author.avatar} />
         </Link>
-        Posted by <Link to={`/profile/${post.author.username}`}>{post.author.username} </Link> on {dateFormatted}
+        Posted by <Link to={`/profile/${post.author.username}`}>{post.author.username}</Link> on {dateFormatted}
       </p>
 
       <div className="body-content">
-        <ReactMarkdown children={post.body} allowedTypes={["paragraph", "text", "emphasis", "strong", "heading", "list", "listItem"]} />
+        <ReactMarkdown source={post.body} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
       </div>
     </Page>
   )

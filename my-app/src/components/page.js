@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
-import Container from "./container"
+import Container from "./Container"
 
 function Page(props) {
   useEffect(() => {
-    document.title = `BlogHub`
+    document.title = `${props.title} | BlogHub`
     window.scrollTo(0, 0)
   }, [props.title])
 
