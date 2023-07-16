@@ -4,10 +4,9 @@ import StateContext from "../StateContext"
 import { useImmer } from "use-immer"
 import LoadingDotsIcon from "./LoadingDotsIcon"
 import Axios from "axios"
-import { Link } from "react-router-dom"
 import Post from "./Post"
 
-function ComponentName() {
+function Home() {
   const appState = useContext(StateContext)
   const [state, setState] = useImmer({
     isLoading: true,
@@ -62,4 +61,4 @@ function ComponentName() {
   )
 }
 
-export default ComponentName
+export default Home

@@ -1,7 +1,6 @@
 import "./App.css"
 import "./common/common.css"
 import React, { useEffect, Suspense } from "react"
-import ReactDOM from "react-dom"
 import { useImmerReducer } from "use-immer"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 import { CSSTransition } from "react-transition-group"
