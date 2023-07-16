@@ -9,7 +9,7 @@ import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
 
 // My Components
-import LoadingDotsIcon from "./components/components/LoadingDotsIcon"
+import LoadingDotsIcon from "./components/LoadingDotsIcon"
 import FlashMessages from "./components/FlashMessages"
 import Header from "./components/Header"
 import Home from "./components/Home"
