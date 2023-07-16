@@ -11,8 +11,6 @@ import DispatchContext from "./DispatchContext"
 // My Components
 import LoadingDotsIcon from "./components/LoadingDotsIcon"
 import Header from "./components/header"
-import HomeGuest from "./components/HomeGuest"
-import Home from "./components/Home"
 import Footer from "./components/Footer"
 import About from "./components/About"
 import Terms from "./components/Terms"
@@ -21,6 +19,8 @@ import FlashMessages from "./components/FlashMessages"
 import Profile from "./components/Profile"
 import EditPost from "./components/EditPost"
 import NotFound from "./components/NotFound"
+import HomeGuest from "./components/HomeGuest"
+import Home from "./components/Home"
 
 Axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL || ""
 
