@@ -1,9 +1,9 @@
-import React, { useEffect } from "react"
-import Page from "./page"
+import React from "react"
+import Page from "./Page"
 
 function Terms() {
   return (
-    <Page title="Terms">
+    <Page title="Ts & Cs">
       <h2>Our Terms &amp; Conditions</h2>
       <p className="lead text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis dolorum labore quisquam vel id dicta fuga! Ducimus, quo. Dolore commodi aliquid error veritatis consequuntur, excepturi cumque fuga eum incidunt doloremque?</p>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. At qui enim rem totam voluptatum. Aut saepe temporibus, facilis ex a iste expedita minima dolorum dicta doloribus libero aliquid, quae maxime? Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat suscipit beatae eum, est soluta ducimus ratione et impedit sapiente, nihil, atque dignissimos adipisci? Totam atque officia quis voluptates sed veniam?</p>
