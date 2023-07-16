@@ -9,17 +9,16 @@ import StateContext from "./StateContext"
 import DispatchContext from "./DispatchContext"
 
 // My Components
-import LoadingDotsIcon from "./components/LoadingDotsIcon"
-import Header from "./components/header"
-import About from "./components/About"
-import Terms from "./components/Terms"
-
+import LoadingDotsIcon from "./components/components/LoadingDotsIcon"
 import FlashMessages from "./components/FlashMessages"
+import Header from "./components/Header"
+import Home from "./components/Home"
+import HomeGuest from "./components/HomeGuest"
 import Profile from "./components/Profile"
 import EditPost from "./components/EditPost"
+import About from "./components/About"
+import Terms from "./components/Terms"
 import NotFound from "./components/NotFound"
-import HomeGuest from "./components/HomeGuest"
-import Home from "./components/Home"
 import Footer from "./components/Footer"
 
 Axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL || ""
