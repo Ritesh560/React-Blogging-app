@@ -4,6 +4,7 @@ import StateContext from "../StateContext"
 import { useImmer } from "use-immer"
 import LoadingDotsIcon from "./LoadingDotsIcon"
 import Axios from "axios"
+import { Link } from "react-router-dom"
 import Post from "./Post"
 
 function Home() {
@@ -41,7 +42,12 @@ function Home() {
     <Page title="Your Feed">
       {state.feed.length > 0 && (
         <>
-          <h2 className="text-center mb-4">The Latest From Those You Follow</h2>
+          <div className="d-flex justify-content-between">
+            <h2 className="text-center mb-4">The Latest Posts on BlogHub.</h2>
+            <Link className="btn btn-sm btn-info mr-4 d-flex align-items-center p-2" to="/create-post" style={{ height: "40px", borderRadius: "5px" }}>
+              <i className="fas fa-plus"></i> <span className="ml-2">Create Post</span>
+            </Link>
+          </div>
           <div className="list-group">
             {state.feed.map((post) => {
               return <Post post={post} key={post._id} />
@@ -49,12 +55,12 @@ function Home() {
           </div>
         </>
       )}
-      {state.feed.length == 0 && (
+      {state.feed.length === 0 && (
         <>
           <h2 className="text-center">
             Hello <strong>{appState.user.username}</strong>, your feed is empty.
           </h2>
-          <p className="lead text-muted text-center">Your feed displays the latest posts from the people you follow. If you don&rsquo;t have any friends to follow that&rsquo;s okay; you can use the &ldquo;Search&rdquo; feature in the top menu bar to find content written by people with similar interests and then follow them.</p>
+          <p className="lead h3 mt-3 text-muted text-center">Start exploring and connect with other users!</p>
         </>
       )}
     </Page>

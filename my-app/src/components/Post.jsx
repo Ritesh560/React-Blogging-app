@@ -3,18 +3,27 @@ import { Link } from "react-router-dom"
 
 function Post(props) {
   const post = props.post
-  const date = new Date(post.createdDate)
-  const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+
+  function trimParagraph(paragraph) {
+    if (paragraph.length <= 150) {
+      return paragraph
+    } else {
+      const trimmedText = paragraph.substring(0, 150)
+      return trimmedText + "..."
+    }
+  }
 
   return (
-    <Link onClick={props.onClick} to={`/post/${post._id}`} className="list-group-item list-group-item-action">
-      <img className="avatar-tiny" src={post.author.avatar} />
-      <strong>{post.title}</strong>
-      <span className="text-muted small">
-        {" "}
-        {!props.noAuthor && <>by {post.author.username}</>} on {dateFormatted}{" "}
-      </span>
-    </Link>
+    <div className="card mb-3">
+      <div className="card-body">
+        <h5 className="card-title">{post.title}</h5>
+        <p className="card-text">{trimParagraph(post.body)}</p>
+
+        <Link onClick={props.onClick} to={`/post/${post._id}`} className="btn btn-primary pointer">
+          Read More
+        </Link>
+      </div>
+    </div>
   )
 }
 
