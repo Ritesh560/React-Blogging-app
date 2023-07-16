@@ -50,7 +50,7 @@ function ViewSinglePost(props) {
 
   function isOwner() {
     if (appState.loggedIn) {
-      return appState.user.username == post.author.username
+      return appState.user.username === post.author.username
     }
     return false
   }
@@ -60,7 +60,7 @@ function ViewSinglePost(props) {
     if (areYouSure) {
       try {
         const response = await Axios.delete(`/post/${id}`, { data: { token: appState.user.token } })
-        if (response.data == "Success") {
+        if (response.data === "Success") {
           // 1. display flash message
           appDispatch({ type: "flashMessage", value: "Post was successfully deleted." })
           // 2. redirect back to the current user's profile
@@ -97,9 +97,7 @@ function ViewSinglePost(props) {
         Posted by <Link to={`/profile/${post.author.username}`}>{post.author.username}</Link> on {dateFormatted}
       </p>
 
-      <div className="body-content">
-        <ReactMarkdown source={post.body} allowedTypes={["paragraph", "strong", "emphasis", "text", "heading", "list", "listItem"]} />
-      </div>
+      <div className="body-content">{post.body}</div>
     </Page>
   )
 }
