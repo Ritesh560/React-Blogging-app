@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import { Link } from "react-router-dom"
-import HeaderLoggedIn from "./headerLoggedIn"
+import HeaderLoggedIn from "./HeaderLoggedIn"
 import StateContext from "../StateContext"
 
 function Header(props) {
