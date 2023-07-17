@@ -90,11 +90,15 @@ function ViewSinglePost(props) {
         )}
       </div>
 
-      <p className="text-muted small mb-4">
+      <p className="text-muted small mb-4 d-flex align-items-center">
         <Link to={`/profile/${post.author.username}`}>
-          <img className="avatar-tiny" src={post.author.avatar} />
+          <span className="user-avatar-sm mr-2">{post.author.username?.[0]}</span>
         </Link>
-        Posted by <Link to={`/profile/${post.author.username}`}>{post.author.username}</Link> on {dateFormatted}
+        Posted by{" "}
+        <Link to={`/profile/${post.author.username}`} className="font-weight-bold mx-1">
+          {post.author.username}
+        </Link>{" "}
+        on {dateFormatted}
       </p>
 
       <div className="body-content">{post.body}</div>

@@ -14,3 +14,64 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: relative;
 }
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: green;
+  border-radius: 50%;
+
+  color: white;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+.user-avatar:hover {
+}
+
+.user-avatar-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: green;
+  border-radius: 50%;
+
+  color: white;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.following-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.avatar-tiny {
+  width: 40px;
+  height: 40px;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}

@@ -36,15 +36,13 @@ function HeaderLoggedIn(props) {
         <span className="chat-count-badge text-white"> </span>
       </span>
       <ReactTooltip place="bottom" id="chat" className="custom-tooltip" /> */}
-      <div className="mr-4">
-        <Link to={`/profile/${appState.user.username}`} data-for="profile" data-tip="My Profile" className="d-flex align-items-center">
-          <img className="small-header-avatar" src={appState.user.avatar} alt="Avatar" />
+      <div className="mr-4 d-flex align-items-center">
+        <Link to={`/profile/${appState.user.username}`} data-for="profile" data-tip="My Profile" className="center">
+          <div className="user-avatar">{appState.user.username?.[0]}</div>
         </Link>
         <ReactTooltip place="bottom" id="profile" className="custom-tooltip" />
       </div>
-      {/* <Link className="btn btn-sm btn-success mr-4" to="/create-post">
-        <i className="fas fa-plus"></i> Create Post
-      </Link> */}
+
       <div>
         <LogOut onClick={handleLoggedOut} data-for="logout" data-tip="Logout" className="pointer" />
         <ReactTooltip place="bottom" id="logout" className="custom-tooltip" />
