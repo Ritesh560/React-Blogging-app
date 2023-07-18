@@ -75,3 +75,6 @@
 .font-weight-bold {
   font-weight: bold;
 }
+.flashAlert {
+  z-index: 99999;
+}
