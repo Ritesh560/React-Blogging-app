@@ -32,15 +32,16 @@ function ProfileFollow(props) {
   if (isLoading) return <LoadingDotsIcon />
 
   return (
-    <div className="list-group">
+    // <div className="list-group">
+    <div className="row following-list">
       {people.length > 0 &&
-        people.map((follower, index) => {
-          return (
-            <Link key={index} to={`/profile/${follower.username}`} className="list-group-item list-group-item-action">
-              <img className="avatar-tiny" src={follower.avatar} alt="" /> {follower.username}
-            </Link>
-          )
-        })}
+        people.map((follower, index) => (
+          <Link key={index} to={`/profile/${follower.username}`} className="list-group-item list-group-item-action d-flex align-items-center">
+            <span className="user-avatar mr-3">{follower.username?.[0]}</span>
+            <span className="font-weight-bold">{follower.username}</span>
+          </Link>
+        ))}
+
       {people.length === 0 && action === "following" && appState.user.username === username && <p className="lead text-muted text-center">You aren&rsquo;t following anyone yet.</p>}
       {people.length === 0 && action === "following" && appState.user.username !== username && <p className="lead text-muted text-center">{username} isn&rsquo;t following anyone yet.</p>}
       {people.length === 0 && action === "followers" && appState.user.username === username && <p className="lead text-muted text-center">You don&rsquo;t have any followers yet.</p>}

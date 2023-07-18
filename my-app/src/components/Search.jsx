@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react"
 import DispatchContext from "../DispatchContext"
 import { useImmer } from "use-immer"
 import Axios from "axios"
-import { Link } from "react-router-dom"
 import Post from "./Post"
 
 function Search() {
@@ -21,7 +20,7 @@ function Search() {
   }, [])
 
   useEffect(() => {
-    if (state.searchTerm.trim) {
+    if (state.searchTerm.trim && state.searchTerm.length) {
       setState((draft) => {
         draft.show = "loading"
       })
@@ -41,6 +40,8 @@ function Search() {
 
   useEffect(() => {
     if (state.requestCount) {
+      if (!state.searchTerm?.length) return
+
       const ourRequest = Axios.CancelToken.source()
       async function fetchResults() {
         try {
@@ -87,7 +88,7 @@ function Search() {
 
       <div className="search-overlay-bottom">
         <div className="container container--narrow py-3">
-          <div className={"circle-loader " + (state.show == "loading" ? "circle-loader--visible" : "")}></div>
+          <div className={"circle-loader " + (state.show === "loading" ? "circle-loader--visible" : "")}></div>
           <div className={"live-search-results " + (state.show == "results" ? "live-search-results--visible" : "")}>
             {Boolean(state.results.length) && (
               <div className="list-group shadow-sm">

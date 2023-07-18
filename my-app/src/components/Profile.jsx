@@ -19,6 +19,7 @@ function Profile() {
       profileAvatar: "https://gravatar.com/avatar/placeholder?s=128",
       isFollowing: false,
       counts: { postCount: "", followerCount: "", followingCount: "" },
+      isLoading: true,
     },
   })
 
@@ -29,7 +30,7 @@ function Profile() {
       try {
         const response = await Axios.post(`/profile/${username}`, { token: appState.user.token }, { cancelToken: ourRequest.token })
         setState((draft) => {
-          draft.profileData = response?.data
+          draft.profileData = { ...response?.data, isLoading: false }
         })
       } catch (error) {
         console.log(error?.response?.data)
@@ -109,9 +110,9 @@ function Profile() {
 
   return (
     <Page title="Profile Screen">
-      <h2>
-        <img className="avatar-small" src={state.profileData.profileAvatar} /> {state.profileData.profileUsername}
-        {appState.loggedIn && !state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != "..." && (
+      <h2 className="d-flex align-items-center">
+        {!state.profileData.isLoading && <span className="user-avatar mr-3">{state.profileData.profileUsername?.[0]}</span>} <span className="text-capitalize">{state.profileData.profileUsername}</span>
+        {appState.loggedIn && !state.profileData.isFollowing && appState.user.username !== state.profileData.profileUsername && state.profileData.profileUsername != "..." && (
           <button onClick={startFollowing} disabled={state.followActionLoading} className="btn btn-primary btn-sm ml-2">
             Follow <i className="fas fa-user-plus"></i>
           </button>
