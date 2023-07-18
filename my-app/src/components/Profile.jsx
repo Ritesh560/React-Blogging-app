@@ -118,8 +118,8 @@ function Profile() {
           </button>
         )}
         {appState.loggedIn && state.profileData.isFollowing && appState.user.username != state.profileData.profileUsername && state.profileData.profileUsername != "..." && (
-          <button onClick={stopFollowing} disabled={state.followActionLoading} className="btn btn-danger btn-sm ml-2">
-            Stop Following <i className="fas fa-user-times"></i>
+          <button onClick={stopFollowing} disabled={state.followActionLoading} className="btn btn-primary btn-sm ml-2">
+            Following <i className="fas fa-user-times"></i>
           </button>
         )}
       </h2>
